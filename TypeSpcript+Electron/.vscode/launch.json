@@ -1,0 +1,44 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // 调试 Electron 主进程
+            "name": "Debug Main Process (Electron Forge)",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron-forge",
+            "args": [
+                "start"
+            ],
+            "cwd": "${workspaceFolder}",
+            "protocol": "inspector",
+            "outputCapture": "std",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "sourceMaps": true,
+            "outFiles": [
+                "${workspaceFolder}/.vite/build/**/*.js"
+            ]
+        },
+        {
+            // 调试渲染进程 (Vite)
+            "name": "Debug Renderer (Vite)",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:5173",
+            "webRoot": "${workspaceFolder}/src",
+            "sourceMaps": true
+        }
+    ],
+    "compounds": [
+        {
+            // 一键启动两个调试器
+            "name": "Debug Electron + Renderer",
+            "configurations": [
+                "Debug Main Process (Electron Forge)",
+                "Debug Renderer (Vite)"
+            ]
+        }
+    ]
+}
