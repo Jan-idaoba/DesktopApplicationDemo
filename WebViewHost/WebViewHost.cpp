@@ -48,7 +48,8 @@ const std::wstring PIPE_NAME = L"\\\\.\\pipe\\WebView2VuePipe";
 // ---------------------------------------------------------
 
 // 连接到 Service 的管道。如果已连接，直接返回 true。
-bool ConnectToService() {
+bool ConnectToService() 
+{
     if (hPipe != INVALID_HANDLE_VALUE) return true;
 
     // 尝试连接(最多等待 5 秒)
@@ -93,7 +94,8 @@ bool ConnectToService() {
 // 线程 1: 发送线程 (Consumer)
 // 负责从队列取出消息并 WriteFile，阻塞不影响 UI
 // ---------------------------------------------------------
-void PipeWriterThread() {
+void PipeWriterThread() 
+{
     while (isRunning) {
         std::string msgToSend;
 
@@ -172,7 +174,8 @@ void PipeWriterThread() {
 // 线程 2: 读取线程
 // 负责 ReadFile 并通知 UI
 // ---------------------------------------------------------
-void PipeReaderThread() {
+void PipeReaderThread() 
+{
     char buffer[4096];
     DWORD bytesRead;
 
@@ -224,7 +227,8 @@ void PipeReaderThread() {
 // UI 线程调用的发送函数 (Producer)
 // 此函数运行在 UI 线程，负责快速将消息放入队列
 // ---------------------------------------------------------
-void SendToServiceAsync(const std::wstring& message) {
+void SendToServiceAsync(const std::wstring& message) 
+{
     // 宽字符转 UTF-8
     int size_needed = WideCharToMultiByte(CP_UTF8, 0, message.c_str(), (int)message.length(), NULL, 0, NULL, NULL);
     std::string strTo(size_needed, 0);
@@ -243,7 +247,8 @@ void SendToServiceAsync(const std::wstring& message) {
 // WebView2 初始化
 // ---------------------------------------------------------
 
-void InitializeWebView(HWND hWnd) {
+void InitializeWebView(HWND hWnd) 
+{
     CreateCoreWebView2EnvironmentWithOptions(nullptr, nullptr, nullptr,
         Callback<ICoreWebView2CreateCoreWebView2EnvironmentCompletedHandler>(
             [hWnd](HRESULT result, ICoreWebView2Environment* env) -> HRESULT {
@@ -289,7 +294,8 @@ void InitializeWebView(HWND hWnd) {
 // 窗口过程 (运行在主 UI 线程)
 // ---------------------------------------------------------
 
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
+{
     switch (message) {
     case WM_SIZE:
         if (webviewController != nullptr) {
@@ -331,9 +337,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
 // 入口点
 // ---------------------------------------------------------
 
-int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow) {
+int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow) 
+{
+    SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
+
     hInst = hInstance;
- 
     WNDCLASSEXW wcex = { 0 };
 	wcex.cbSize = sizeof(WNDCLASSEX);
 	wcex.style = CS_HREDRAW | CS_VREDRAW;
@@ -345,7 +353,9 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
     RegisterClassExW(&wcex);
     hWndMain = CreateWindowW(L"WebView2VueHost", L"Native Vue App (Async Pipe)", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, 0, 1024, 768, nullptr, nullptr, hInstance, nullptr);
 
-    if (!hWndMain) return FALSE;
+    if (!hWndMain) 
+        return FALSE;
+
     ShowWindow(hWndMain, nCmdShow);
     UpdateWindow(hWndMain);
 
