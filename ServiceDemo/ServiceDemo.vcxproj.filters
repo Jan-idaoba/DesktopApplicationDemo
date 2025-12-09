@@ -13,10 +13,30 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="PipeServer">
+      <UniqueIdentifier>{e4441967-7f91-4c11-b1df-a8d83fbc12fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ServiceManager">
+      <UniqueIdentifier>{45f27e4c-8df5-45b4-8bac-50802ffdb007}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ServiceDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PipeServer\PipeServer.cpp">
+      <Filter>PipeServer</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceManager\ServiceManager.cpp">
+      <Filter>ServiceManager</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PipeServer\PipeServer.h">
+      <Filter>PipeServer</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceManager\ServiceManager.h">
+      <Filter>ServiceManager</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

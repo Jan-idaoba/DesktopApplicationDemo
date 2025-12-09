@@ -127,7 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="PipeServer\PipeServer.cpp" />
     <ClCompile Include="ServiceDemo.cpp" />
+    <ClCompile Include="ServiceManager\ServiceManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PipeServer\PipeServer.h" />
+    <ClInclude Include="ServiceManager\ServiceManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
