@@ -12,6 +12,30 @@
 #include <memory>
 #include <chrono>
 
+/* 
+消息格式示例（JSON 结构，仅供参考）：
+{
+        "ver": "1.0",                   // 协议版本（字符串或整数）
+        "type" : "Hello|Welcome|Auth|Heartbeat|Request|Response|Notify|Error|Goodbye",
+        "msgId" : "uuid-...-...",       // 消息唯一ID（用于匹配请求/响应）
+        "clientId" : "optional",        // 客户端ID（握手后必须带；握手前可省略）
+        "timestamp" : 1733800000000,    // 服务器或客户端填的毫秒时间戳（UTC）
+        "traceId" : "optional",         // 跟踪ID（便于跨进程排查）
+        "flags" : {                     // 可选标记位
+        "compressed": false,
+            "urgent" : false
+    },
+        "payload" : {                   // 业务数据（不同type结构不同）
+        // ...
+    },
+        "error" : {                     // 仅当type=Error或响应失败时出现
+        "code": "BadRequest",
+            "message" : "具体错误信息",
+            "details" : {  可选  }
+    }
+}
+*/
+
 // 消息结构：4字节长度前缀 + 实际数据
 struct PipeMessage
 {

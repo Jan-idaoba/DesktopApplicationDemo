@@ -22,10 +22,11 @@ static HANDLE MakeAutoResetEvent() {
 }
 
 PipeServer::PipeServer(const std::wstring& pipeName, size_t maxInstances, size_t bufferSize)
-    : m_pipeName(pipeName),
-    m_maxInstances(maxInstances),
-    m_bufferSize(bufferSize)
+    : m_pipeName(pipeName)
+    , m_maxInstances(maxInstances)
+    , m_bufferSize(bufferSize)
 {
+
 }
 
 PipeServer::~PipeServer()
@@ -111,7 +112,8 @@ size_t PipeServer::Broadcast(const std::vector<uint8_t>& payload)
         }
     }
 
-    for (auto& ctx : clients) {
+    for (auto& ctx : clients)
+    {
         {
             std::lock_guard<std::mutex> lk(ctx->sendMutex);
             PipeMessage msg;
@@ -134,7 +136,7 @@ size_t PipeServer::BroadcastJson(const std::string& jsonUtf8)
 
 bool PipeServer::TryPopReceived(PipeMessage& msg)
 {
-    std::lock_guard<std::mutex> lk(m_recvMutex);  // 修复：使用正确的mutex
+    std::lock_guard<std::mutex> lk(m_recvMutex);  
     if (m_receiveData.empty())
         return false;
     msg = std::move(m_receiveData.front());
@@ -318,31 +320,31 @@ void PipeServer::HandleClientRead(std::shared_ptr<ClientContext> ctx)
 
         // 处理完整消息（简单协议：4字节长度 + 数据）
         while (messageBuffer.size() >= 4) {
-            //uint32_t msgLen = *reinterpret_cast<uint32_t*>(messageBuffer.data());
+            uint32_t msgLen = *reinterpret_cast<uint32_t*>(messageBuffer.data());
 
-            //// 防止恶意超大消息
-            //if (msgLen > 10 * 1024 * 1024) {  // 10MB 限制
-            //    Log("Message too large, disconnecting client");
-            //    ctx->running = false;
-            //    break;
-            //}
+            // 防止恶意超大消息
+            if (msgLen > 10 * 1024 * 1024) {  // 10MB 限制
+                Log("Message too large, disconnecting client");
+                ctx->running = false;
+                break;
+            }
 
-            //if (messageBuffer.size() < 4 + msgLen) {
-            //    // 消息不完整，继续读取
-            //    break;
-            //}
+            if (messageBuffer.size() < 4 + msgLen) {
+                // 消息不完整，继续读取
+                break;
+            }
 
             // 提取完整消息
             std::vector<uint8_t> payload(
-                messageBuffer.begin(),
-                messageBuffer.end() //+ 4 + msgLen
+                messageBuffer.begin() + 4,
+                messageBuffer.begin() + 4 + msgLen
             );
 
             // 处理消息
             ProcessReceivedMessage(ctx, payload);
 
             // 移除已处理的消息
-            messageBuffer.erase(messageBuffer.begin(), messageBuffer.begin() + 4 /*+ msgLen*/);
+            messageBuffer.erase(messageBuffer.begin(), messageBuffer.begin() + 4 + msgLen);
         }
     }
 
