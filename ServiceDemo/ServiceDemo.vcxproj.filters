@@ -19,6 +19,9 @@
     <Filter Include="ServiceManager">
       <UniqueIdentifier>{45f27e4c-8df5-45b4-8bac-50802ffdb007}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Service">
+      <UniqueIdentifier>{3e2098ab-de0a-483a-b60e-3d8f0db10f55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ServiceDemo.cpp">
@@ -30,6 +33,9 @@
     <ClCompile Include="ServiceManager\ServiceManager.cpp">
       <Filter>ServiceManager</Filter>
     </ClCompile>
+    <ClCompile Include="Service\ServiceBase.cpp">
+      <Filter>Service</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PipeServer\PipeServer.h">
@@ -37,6 +43,9 @@
     </ClInclude>
     <ClInclude Include="ServiceManager\ServiceManager.h">
       <Filter>ServiceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Service\ServiceBase.h">
+      <Filter>Service</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

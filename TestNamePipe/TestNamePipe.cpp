@@ -265,7 +265,7 @@ int main(int argc, char* argv[]) {
             }
             Log("<< Received payload (" + std::to_string(payload.size()) + " bytes):");
             std::cout << payload << std::endl;
-            //PrintHex(payload);
+            PrintHex(payload);
         }
         running = false;
         });

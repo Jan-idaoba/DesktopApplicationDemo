@@ -141,8 +141,19 @@ const std::wstring PIPE_NAME = L"\\\\.\\pipe\\WebView2VuePipe";
 //    return 0;
 //}
 
+//#include <spdlog/spdlog.h>
+//#include <spdlog/sinks/basic_file_sink.h>
+
 int main()
 {
+
+    //auto logger = spdlog::basic_logger_mt(
+    //    "file_logger", "logs/app.log");
+
+    //logger->info("Hello spdlog");
+    //logger->warn("This is a warning");
+    //logger->error("Error code = {}", 123);
+
     std::wcout << L"[Service] Starting Named Pipe Server (Async Mode)..." << std::endl;
     
 	PipeServer pipeServer(PIPE_NAME);
@@ -153,7 +164,7 @@ int main()
     while (true)
     {
 	    std::cin >> input;
-        //pipeServer
+		pipeServer.SendJsonToClient("CLI-Console-001", input);
     }
     return 0;
 }

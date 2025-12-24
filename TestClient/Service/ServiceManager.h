@@ -14,24 +14,19 @@
 class ServiceManager : public ServiceBase
 {
 public:
-    // 业务处理器：输入收到的消息，返回待发的字节（或空表示不回复）
     using RequestHandler = std::function<std::vector<uint8_t>(const PipeMessage&)>;
 
     explicit ServiceManager(const std::wstring& pipeName,
         size_t maxInstances = 20,
         size_t bufferSize = 4096);
-
     ~ServiceManager();
-
     ServiceManager(const ServiceManager&) = delete;
     ServiceManager& operator=(const ServiceManager&) = delete;
 
-    // 启动/停止
-    bool Start();
-    void Stop();
-
+public:
     void SetRequestHandler(RequestHandler handler);
-    PipeServer& Server() { return m_server; }
+    PipeServer& Server() { return m_PipeServer; }
+    std::vector<uint8_t> RequestHandle(const PipeMessage& Message);
 
 public:
 	void OnStart(DWORD argc, LPWSTR* argv) override;
@@ -42,13 +37,12 @@ public:
 	void OnError(const std::wstring& function, DWORD error) override;
 
 private:
-    // 业务线程：循环取消息 -> 处理 -> 回发
     void WorkerLoop();
 
 private:
-    PipeServer            m_server;
+    PipeServer            m_PipeServer;
     std::atomic<bool>     m_running{ false };
     std::thread           m_worker;
 
-    RequestHandler        m_handler; // 业务处理（可空）
+    RequestHandler        m_handler;
 };

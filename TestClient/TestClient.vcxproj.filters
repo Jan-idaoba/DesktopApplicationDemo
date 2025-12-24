@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Service">
+      <UniqueIdentifier>{efc5303b-7613-494b-9120-a5c0b42b0690}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PipeServer">
+      <UniqueIdentifier>{bf21ea6b-70e2-49e0-9407-0d1e9d49a613}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Log">
+      <UniqueIdentifier>{87922dc7-bc4c-4d9f-95c6-f1b1b51bd546}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{eb14075b-7383-43f2-85f6-403a571805c5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestClient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PipeServer\PipeServer.h">
+      <Filter>PipeServer</Filter>
+    </ClInclude>
+    <ClInclude Include="Service\ServiceBase.h">
+      <Filter>Service</Filter>
+    </ClInclude>
+    <ClInclude Include="Service\ServiceManager.h">
+      <Filter>Service</Filter>
+    </ClInclude>
+    <ClInclude Include="Log\LogConfig.h">
+      <Filter>Log</Filter>
+    </ClInclude>
+    <ClInclude Include="Log\Logger.h">
+      <Filter>Log</Filter>
+    </ClInclude>
+    <ClInclude Include="Log\LogMacros.h">
+      <Filter>Log</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Common.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TestClient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PipeServer\PipeServer.cpp">
+      <Filter>PipeServer</Filter>
+    </ClCompile>
+    <ClCompile Include="Service\ServiceBase.cpp">
+      <Filter>Service</Filter>
+    </ClCompile>
+    <ClCompile Include="Service\ServiceManager.cpp">
+      <Filter>Service</Filter>
+    </ClCompile>
+    <ClCompile Include="Log\Logger.cpp">
+      <Filter>Log</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TestClient.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="TestClient.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
